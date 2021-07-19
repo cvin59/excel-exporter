@@ -5,11 +5,14 @@ import {
   TableStyleProperties,
 } from 'exceljs';
 import ColumnDefinition from '../column/column';
+import Style from '../style/style';
 
 type ColumnDefineFunc = (input: ColumnDefinition) => ColumnDefinition;
 export default class TableBuilder {
   private columnDefinitions: Set<ColumnDefinition>;
   private readonly table: Table;
+  private headerStyle: Style;
+  private dataStyle: Style;
 
   name(name: string): this {
     this.table.name = name;
