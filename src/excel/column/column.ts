@@ -1,13 +1,29 @@
+import { TableColumnProperties } from 'exceljs';
 import Style from '../style/style';
 type ConditionalStyleFunc = (typeClass: any) => Style;
-export default class ColumnDefinition {
-  private colName: string;
+export default class ColumnDefinition implements TableColumnProperties {
+  name: string;
   private displayName: string;
   private columnStyle: Style;
   private conditionalStyle: ConditionalStyleFunc;
   constructor() {}
-  field(colName: string): ColumnDefinition {
-    this.colName = colName;
+  filterButton?: boolean | undefined;
+  totalsRowLabel?: string | undefined;
+  totalsRowFunction?:
+    | 'none'
+    | 'average'
+    | 'countNums'
+    | 'count'
+    | 'max'
+    | 'min'
+    | 'stdDev'
+    | 'var'
+    | 'sum'
+    | 'custom'
+    | undefined;
+  totalsRowFormula?: string | undefined;
+  field(name: string): ColumnDefinition {
+    this.name = name;
     return this;
   }
   title(displayName: string): ColumnDefinition {
@@ -22,7 +38,7 @@ export default class ColumnDefinition {
     this.conditionalStyle = style;
     return this;
   }
-  getValue(obj: any){
-    return obj && obj[this.colName];
+  getValue(obj: any) {
+    return obj && obj[this.name];
   }
 }

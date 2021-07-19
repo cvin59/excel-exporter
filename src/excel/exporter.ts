@@ -1,6 +1,6 @@
 import { Workbook, Buffer, Worksheet } from 'exceljs';
 import { Stream } from 'stream';
-import TableBuilder from './table/table.builder';
+import { Table } from './table/table';
 
 interface Exporter {
   export(data: any[]): Promise<Buffer>;
@@ -36,7 +36,7 @@ class BaseExporter implements Exporter {
     }
   }
 
-  writeData(template: TableBuilder, data: any[]){
+  writeData(template: Table, data: any[]){
       
   }
 
